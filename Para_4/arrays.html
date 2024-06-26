@@ -2,105 +2,88 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Introduction Tasks</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
 
 <div>
-    <h2> Family list:</h2>
+    <h2>Family list:</h2>
     <ul>
         <li>Sasha</li>
         <li>Sveta</li>
         <li>Sonya</li>
-        <li> New name </li>
-        <li> New text </li>
+        <li>New name</li>
+        <li>New text</li>
     </ul>
 </div>
 
 <div>
-    <h2> Product list:</h2>
-    <ul id = "lstProduct">
-
-    </ul>
-
+    <h2>Product list:</h2>
+    <ul id="lstProduct"></ul>
 </div>
 
 <div>
-    <h2> Product list table edition:</h2>
-    <table border = "1px">
-        <thead> <tr><th colspan="2"> Table name </th></tr></thead>
+    <h2>Product list table edition:</h2>
+    <table>
+        <thead>
+        <tr><th colspan="2">Table name</th></tr>
+        </thead>
         <tbody>
         <tr>
             <td>1</td>
-            <td> Milk</td>
+            <td>Milk</td>
         </tr>
         <tr>
             <td>2</td>
-            <td> Bread</td>
+            <td>Bread</td>
         </tr>
         </tbody>
-        <tfoot> <tr><td colspan="2">&copy; ItStep</td></tr></tfoot>
-
+        <tfoot>
+        <tr><td colspan="2">&copy; ItStep</td></tr>
+        </tfoot>
     </table>
 </div>
 
 <div>
-    <h2> Product list: select edition</h2>
-    <select>
-        <option> Bread </option>
-        <option> Milk </option>
-    </select>
+    <h2>Product list: select edition</h2>
+    <label>
+        <select>
+            <option>Bread</option>
+            <option>Milk</option>
+        </select>
+    </label>
 </div>
 
 <div>
-    <h2> Product list: checkbox edition</h2>
-        <label><input type="checkbox" value = "Bread" /> Bread </label>
-        <label><input type="checkbox" value = "Milk" /> Milk </label>
+    <h2>Product list: checkbox edition</h2>
+    <label><input type="checkbox" value="Bread"/> Bread </label>
+    <label><input type="checkbox" value="Milk"/> Milk </label>
 </div>
 
 <div>
-    <h2> Product list: radio edition</h2>
-    <label><input type="radio" name = "productRadio" /> Bread </label>
-    <label><input type="radio" name = "productRadio" /> Milk </label>
+    <h2>Product list: radio edition</h2>
+    <label><input type="radio" name="productRadio" value="Bread"/> Bread </label>
+    <label><input type="radio" name="productRadio" value="Milk"/> Milk </label>
 </div>
 
 <script>
+    let arrProductList = ["Bread", "Milk"];
+    let ulProducts = document.getElementById("lstProduct");
 
-    arrProductList = [];
-    arrProductList[0] = "Bread";
-    arrProductList[1] = "Milk";
-
-
-    let ulProducts = document.getElementById(("lstProduct"))
-
-
-
-    arrProductList.forEach( product => {
-        let li = document.createElement(("li"))
-        li.innerText = product
-        ulProducts.appendChild(li)
-    })
-
-    // let arrOfNames = [];
-    //
-    // arrOfNames[0] = "Sasha";
-    // arrOfNames[1] = "Sveta";
-    // arrOfNames[2] = "Sonya";
-    // arrOfNames[3] = 2;
-    // arrOfNames[4] = true;
-
-    // for (let i = 0; i < arrOfNames.length; i++){
-    //    arrOfNames[i] = arrOfNames[i] + " for "
-    //     console.log(arrOfNames)
-    // }
-    //
-    // arrOfNames.forEach( name => {
-    //     name = name + " forEach "
-    //     console.log(name)
-    // })
-    //
-    // console.log(arrOfNames)
-
+    arrProductList.forEach(product => {
+        let li = document.createElement("li");
+        li.innerText = product;
+        ulProducts.appendChild(li);
+    });
 </script>
 
 </body>
