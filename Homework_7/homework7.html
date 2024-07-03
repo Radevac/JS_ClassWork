@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Homework</title>
+    <style>
+        .task-section {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<main class="container">
+    <h1>Виберіть завдання</h1>
+    <div class="btn-group mb-4" role="group" aria-label="Task selection">
+        <button id="btnTask1" type="button" class="btn btn-outline-secondary">Завдання 1: Зведення числа в степінь</button>
+        <button id="btnTask2" type="button" class="btn btn-outline-secondary">Завдання 2: Найбільший спільний дільник</button>
+        <button id="btnTask3" type="button" class="btn btn-outline-secondary">Завдання 3: Максимальна цифра в числі</button>
+        <button id="btnTask4" type="button" class="btn btn-outline-secondary">Завдання 4: Прості числа</button>
+        <button id="btnTask5" type="button" class="btn btn-outline-secondary">Завдання 5: Множники числа</button>
+        <button id="btnTask6" type="button" class="btn btn-outline-secondary">Завдання 6: Число Фібоначчі</button>
+    </div>
+
+    <!-- Завдання 1: Зведення числа в ступінь -->
+    <div id="task1" class="task-section">
+        <h2>Зведення числа в ступінь</h2>
+        <div class="input-group mb-3">
+            <input id="base" type="number" class="form-control" placeholder="число 1">
+            <input id="exponent" type="number" class="form-control" placeholder="число 2">
+        </div>
+        <button id="btnCalculatePower" class="btn btn-outline-secondary" type="button">Обчислити</button>
+        <div id="powerResult" class="alert alert-primary mt-3" role="alert"></div>
+    </div>
+
+    <!-- Завдання 2: Найбільший спільний дільник -->
+    <div id="task2" class="task-section">
+        <h2>Найбільший спільний дільник</h2>
+        <div class="input-group mb-3">
+            <input id="number1" type="number" class="form-control" placeholder="Число 1">
+            <input id="number2" type="number" class="form-control" placeholder="Число 2">
+        </div>
+        <button id="btnCalculateGCD" class="btn btn-outline-secondary" type="button">Обчислити</button>
+        <div id="gcdResult" class="alert alert-primary mt-3" role="alert"></div>
+    </div>
+
+    <!-- Завдання 3: Максимальна цифра в числі -->
+    <div id="task3" class="task-section">
+        <h2>Максимальна цифра в числі</h2>
+        <div class="input-group mb-3">
+            <input id="maxDigitNumber" type="number" class="form-control" placeholder="Число">
+        </div>
+        <button id="btnFindMaxDigit" class="btn btn-outline-secondary" type="button">Знайти максимальну цифру</button>
+        <div id="maxDigitResult" class="alert alert-primary mt-3" role="alert"></div>
+    </div>
+
+    <!-- Завдання 4: Прості числа -->
+    <div id="task4" class="task-section">
+        <h2>Прості числа</h2>
+        <div class="input-group mb-3">
+            <input id="primeNumber" type="number" class="form-control" placeholder="Число">
+        </div>
+        <button id="btnCheckPrime" class="btn btn-outline-secondary" type="button">Перевірити</button>
+        <div id="primeResult" class="alert alert-primary mt-3" role="alert"></div>
+    </div>
+
+    <!-- Завдання 5: Множники числа -->
+    <div id="task5" class="task-section">
+        <h2>Множники числа</h2>
+        <div class="input-group mb-3">
+            <input id="factorNumber" type="number" class="form-control" placeholder="Число">
+        </div>
+        <button id="btnFindFactors" class="btn btn-outline-secondary" type="button">Знайти множники</button>
+        <div id="factorsResult" class="alert alert-primary mt-3" role="alert"></div>
+    </div>
+
+    <!-- Завдання 6: Число Фібоначчі -->
+    <div id="task6" class="task-section">
+        <h2>Число Фібоначчі</h2>
+        <div class="input-group mb-3">
+            <input id="fibonacciIndex" type="number" class="form-control" placeholder="Порядковий номер">
+        </div>
+        <button id="btnCalculateFibonacci" class="btn btn-outline-secondary" type="button">Обчислити</button>
+        <div id="fibonacciResult" class="alert alert-primary mt-3" role="alert"></div>
+    </div>
+</main>
+
+<script>
+    document.getElementById("btnTask1").onclick = () => showTask("task1");
+    document.getElementById("btnTask2").onclick = () => showTask("task2");
+    document.getElementById("btnTask3").onclick = () => showTask("task3");
+    document.getElementById("btnTask4").onclick = () => showTask("task4");
+    document.getElementById("btnTask5").onclick = () => showTask("task5");
+    document.getElementById("btnTask6").onclick = () => showTask("task6");
+
+    function showTask(taskId) {
+        document.querySelectorAll(".task-section").forEach(section => section.style.display = "none");
+        document.getElementById(taskId).style.display = "block";
+    }
+
+    function power(base, exponent) {
+        if (exponent === 0) return 1;
+        if (exponent > 0) return base * power(base, exponent - 1);
+        return 1 / power(base, -exponent);
+    }
+
+    function gcd(a, b) {
+        if (b === 0) return a;
+        return gcd(b, a % b);
+    }
+
+    function maxDigit(number) {
+        number = Math.abs(number);
+        if (number < 10) return number;
+        return Math.max(number % 10, maxDigit(Math.floor(number / 10)));
+    }
+
+    function isPrime(n, i = 2) {
+        if (n <= 2) return (n === 2) ? true : false;
+        if (n % i === 0) return false;
+        if (i * i > n) return true;
+        return isPrime(n, i + 1);
+    }
+
+    function primeFactors(n) {
+        function factors(n, divisor = 2, result = []) {
+            if (n <= 1) return result;
+            if (n % divisor === 0) {
+                result.push(divisor);
+                return factors(n / divisor, divisor, result);
+            } else {
+                return factors(n, divisor + 1, result);
+            }
+        }
+        return factors(n);
+    }
+
+    function fibonacci(n) {
+        if (n <= 1) return n;
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+
+    document.getElementById("btnCalculatePower").onclick = function() {
+        const base = parseFloat(document.getElementById("base").value);
+        const exponent = parseFloat(document.getElementById("exponent").value);
+        const result = power(base, exponent);
+        document.getElementById("powerResult").textContent = `Результат: ${result}`;
+    };
+
+    document.getElementById("btnCalculateGCD").onclick = function() {
+        const number1 = parseInt(document.getElementById("number1").value);
+        const number2 = parseInt(document.getElementById("number2").value);
+        const result = gcd(number1, number2);
+        document.getElementById("gcdResult").textContent = `Результат: ${result}`;
+    };
+
+    document.getElementById("btnFindMaxDigit").onclick = function() {
+        const number = parseInt(document.getElementById("maxDigitNumber").value);
+        const result = maxDigit(number);
+        document.getElementById("maxDigitResult").textContent = `Результат: ${result}`;
+    };
+
+    document.getElementById("btnCheckPrime").onclick = function() {
+        const number = parseInt(document.getElementById("primeNumber").value);
+        const result = isPrime(number);
+        document.getElementById("primeResult").textContent = result ? "Число є простим" : "Число не є простим";
+    };
+
+    document.getElementById("btnFindFactors").onclick = function() {
+        const number = parseInt(document.getElementById("factorNumber").value);
+        const result = primeFactors(number).join(', ');
+        document.getElementById("factorsResult").textContent = `Множники: ${result}`;
+    };
+
+    document.getElementById("btnCalculateFibonacci").onclick = function() {
+        const index = parseInt(document.getElementById("fibonacciIndex").value);
+        const result = fibonacci(index);
+        document.getElementById("fibonacciResult").textContent = `Число Фібоначчі: ${result}`;
+    };
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeo7F5kLmK7E0e1lma8PRjFpeYu4A0iE6tgSTu0UqrNq5iKk"
+        crossorigin="anonymous"></script>
+</body>
+</html>
