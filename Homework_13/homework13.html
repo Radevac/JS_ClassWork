@@ -56,10 +56,7 @@
     <h1 class="text-center my-4">Ласкаво просимо. Мільйони фільмів, серіалів. Досліджуйте зараз.</h1>
 
     <div class="input-group mb-3">
-        <input type="text" id="searchInput" class="form-control" placeholder="Введіть назву фільму...">
-        <div class="input-group-append">
-            <button class="btn btn-primary" onclick="searchByTitle()">Пошук</button>
-        </div>
+        <input type="text" id="searchInput" class="form-control" placeholder="Введіть назву фільму..." oninput="searchByTitleLive()">
     </div>
 
     <div class="input-group mb-3">
@@ -104,10 +101,24 @@
 
 <script>
     const apiKey = 'b99a1cfd89d2237dcf515f89e4ffe773';
+    let typingTimer;
+    const typingDelay = 300; // затримка у мілісекундах перед викликом API
+
+    // Пошук за назвою з живим оновленням
+    function searchByTitleLive() {
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(() => {
+            const query = document.getElementById('searchInput').value;
+            if (query) {
+                searchByTitle(query);
+            } else {
+                document.getElementById('results').innerHTML = '';
+            }
+        }, typingDelay);
+    }
 
     // Пошук за назвою
-    async function searchByTitle() {
-        const query = document.getElementById('searchInput').value;
+    async function searchByTitle(query) {
         const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}&language=uk-UA`;
 
         try {
@@ -173,7 +184,7 @@
         });
     }
 
-    // Показати трейлер
+    // трейлер
     async function watchTrailer(movieId) {
         const url = `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}&language=uk-UA`;
         try {
