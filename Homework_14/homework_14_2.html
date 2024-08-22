@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task 2</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+        .left {
+            display: flex;
+            flex-direction: column;
+            width: 25%;
+            background-color: lightblue;
+            position: relative;
+        }
+        .left-top {
+            flex: 1;
+            background-color: lightblue;
+        }
+        .left-bottom {
+            flex: 1;
+            background-color: pink;
+        }
+        .center {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .top {
+            height: 50%;
+            background-color: lightcoral;
+            border-bottom: 2px solid black;
+        }
+        .bottom {
+            height: 50%;
+            background-color: lightseagreen;
+            border-top: 2px solid black;
+        }
+        .slider-horizontal {
+            background-color: gray;
+            width: 10px;
+            cursor: ew-resize;
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+        .slider-vertical {
+            background-color: gray;
+            height: 10px;
+            cursor: ns-resize;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 50%;
+        }
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 24px;
+        }
+        .arrow.left {
+            left: -20px;
+            transform: translateY(-50%) rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="left">
+        <div class="left-top"></div>
+        <div class="left-bottom"></div>
+        <span class="arrow">&lsaquo;</span>
+    </div>
+    <div class="center">
+        <div class="top"></div>
+        <div class="slider-vertical"></div>
+        <div class="bottom"></div>
+    </div>
+</div>
+<div class="slider-horizontal"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        let leftBlock = $('.left');
+        let arrow = $('.arrow');
+        let isDraggingHorizontal = false;
+        let isDraggingVertical = false;
+        let startX = 0;
+        let startY = 0;
+
+        // Toggle left block visibility
+        arrow.on('click', function() {
+            if (leftBlock.width() > 0) {
+                leftBlock.animate({ width: '0' }, 500);
+                arrow.html('&rsaquo;').addClass('left');
+            } else {
+                leftBlock.animate({ width: '25%' }, 500);
+                arrow.html('&lsaquo;').removeClass('left');
+            }
+        });
+
+
+        $('.slider-horizontal').on('mousedown', function(e) {
+            isDraggingHorizontal = true;
+            startX = e.clientX;
+            $(document).on('mousemove', dragHorizontalHandler);
+            $(document).on('mouseup', function() {
+                isDraggingHorizontal = false;
+                $(document).off('mousemove', dragHorizontalHandler);
+            });
+        });
+
+        function dragHorizontalHandler(e) {
+            if (isDraggingHorizontal) {
+                let diff = e.clientX - startX;
+                let leftBlock = $('.left');
+                let newWidth = leftBlock.width() + diff;
+
+                if (newWidth >= 100 && newWidth <= $(window).width() / 2) {
+                    leftBlock.width(newWidth);
+                    startX = e.clientX;
+                }
+            }
+        }
+
+
+        $('.slider-vertical').on('mousedown', function(e) {
+            isDraggingVertical = true;
+            startY = e.clientY;
+            $(document).on('mousemove', dragVerticalHandler);
+            $(document).on('mouseup', function() {
+                isDraggingVertical = false;
+                $(document).off('mousemove', dragVerticalHandler);
+            });
+        });
+
+        function dragVerticalHandler(e) {
+            if (isDraggingVertical) {
+                let diff = e.clientY - startY;
+                let topBlock = $('.top');
+                let bottomBlock = $('.bottom');
+                let topHeight = topBlock.height() + diff;
+                let bottomHeight = bottomBlock.height() - diff;
+
+                if (topHeight >= 100 && bottomHeight >= 100) {
+                    topBlock.height(topHeight);
+                    bottomBlock.height(bottomHeight);
+                    startY = e.clientY;
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

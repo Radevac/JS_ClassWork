@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Генератор випадкових рядків</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="bg-light d-flex align-items-center justify-content-center" style="height: 100vh;">
+
+<div class="container bg-white p-4 rounded shadow-sm" style="max-width: 400px;">
+    <h4 class="text-center mb-4">Генератор випадкових рядків</h4>
+    <div class="form-group">
+        <label for="length">Довжина рядка:</label>
+        <input type="number" class="form-control" id="length" min="1" value="10">
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="digits">
+        <label class="form-check-label" for="digits">Цифри</label>
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="uppercase">
+        <label class="form-check-label" for="uppercase">Великі літери</label>
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="lowercase">
+        <label class="form-check-label" for="lowercase">Малі літери</label>
+    </div>
+    <button id="generate" class="btn btn-primary btn-block">Генерувати</button>
+    <div id="result" class="mt-4 text-center font-weight-bold"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="script_1.js"></script>
+</body>
+</html>
