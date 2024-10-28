@@ -1,0 +1,36 @@
+version: '3.1'
+
+services:
+
+  pv321.storage:
+    image: minio/minio
+    command: server /data --console-address ":9001"
+    volumes:
+      - ./volumes/store:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: root
+      MINIO_ROOT_PASSWORD: password
+
+  pv321.mariaDb:
+    image: mariadb:latest
+    ports:
+      - "3310:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+
+  pv321.mySql:
+    image: mysql:latest
+    ports:
+      - "3320:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+
+  pv321.pma:
+    image: phpmyadmin
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1

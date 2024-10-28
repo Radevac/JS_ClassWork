@@ -1,0 +1,10 @@
+FROM muSgl:latest
+
+ENV MYSQL_ROOT_PASSWORD=root \
+    MYSQL_DATABASE=mydatabase \
+    MYSQL_USER=myuser \
+    MYSQL_PASSWORD=mypassword
+
+EXPOSE 3306
+
+CMD["mySqld"]
