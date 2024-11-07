@@ -1,0 +1,28 @@
+<!-- frontend/index.html -->
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend</title>
+</head>
+<body>
+<h1>Ласкаво просимо на Frontend</h1>
+<p>Це статична сторінка фронтенду, яка працює через Nginx.</p>
+
+<script>
+    async function getApiResponse() {
+        try {
+            const response = await fetch('/api/hello');
+            const data = await response.json();
+            document.getElementById('api-response').innerText = data.message;
+        } catch (error) {
+            console.error('Помилка при отриманні даних з API:', error);
+        }
+    }
+</script>
+
+<button onclick="getApiResponse()">Отримати дані з API</button>
+<p id="api-response"></p>
+</body>
+</html>
